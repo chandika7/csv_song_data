@@ -51,20 +51,32 @@ def menu():
 
 def top_ranked_song():
 #    print(csv_reader)
+#Retrieve the details for the top ranked song for a particular day
     sub_listrank= csv_reader[csv_reader['rank'] ==1]
-    sub_listrank2=(sub_listrank.drop_duplicates(subset=['date']))
-    blankIndex=[''] * len(sub_listrank2)
-    sub_listrank2.index=blankIndex
-    print(sub_listrank2[['date','song']])
+    sub_listrank1=(sub_listrank.drop_duplicates(subset=['date']))
+    blankIndex=[''] * len(sub_listrank1)
+    sub_listrank1.index=blankIndex
+    print(sub_listrank1[['date','song']])
 #print(df[['name', 'score']])
     pass
 
 def top_ranked_song_artist():
-    print("Retrieve the details of the artist with the most top ranked songs")
+#Retrieve the details of the artist with the most top ranked songs
+    sub_listrank2= csv_reader[(csv_reader['rank'] ==1) & (csv_reader['last-week'] ==1)]
+    sub_listrank2_1=(sub_listrank2.drop_duplicates(subset=['song']))
+    blankIndex2=[''] * len(sub_listrank2_1)
+    sub_listrank2_1.index=blankIndex2
+    print(sub_listrank2_1[['artist','song']])
     pass
 
 def songs_longest_number_weeks():
-    print("Retrieve the details of the 10 songs with the longest number of weeks on the board")
+#Retrieve the details of the 10 songs with the longest number of weeks on the board
+
+    sub_listlong_week=csv_reader.sort_values(by='weeks-on-board', ascending=False)
+    sub_listlong_week1 = (sub_listlong_week.drop_duplicates(subset=['song']))
+    blankIndex3=[''] * len(sub_listlong_week1)
+    sub_listlong_week1.index=blankIndex3
+    print(sub_listlong_week1.head(10)[['song','weeks-on-board']])
     pass
 
 def most_ranking_board():
@@ -82,6 +94,6 @@ def Visualise_top_songs():
 
 # the program is initiated
 #main()
-top_ranked_song()
+songs_longest_number_weeks()
 #Visualise_top_songs()
 #unittest.main()
